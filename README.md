@@ -1,6 +1,6 @@
 # GeoKo
 
-GecKo is the library converting geolocation code.
+GecKo is the library converting korea geolocation code.
 
 ## Installation
 
