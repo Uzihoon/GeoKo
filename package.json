@@ -1,7 +1,7 @@
 {
   "name": "geoko",
   "version": "1.0.0",
-  "description": "This is GeoKo",
+  "description": "GecKo is the library converting geolocation code.",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
