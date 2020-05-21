@@ -4,19 +4,32 @@
   "description": "GecKo is the library converting geolocation code.",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Uzihoon/GeoKo.git"
   },
   "keywords": [
-    "Geograpic"
+    "Geograpic",
+    "geolocation",
+    "korea map"
   ],
   "author": "Uzihoon",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Uzihoon/GeoKo/issues"
   },
-  "homepage": "https://github.com/Uzihoon/GeoKo#readme"
+  "homepage": "https://github.com/Uzihoon/GeoKo#readme",
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0"
+  },
+  "dependencies": {
+    "typescript": "^3.9.3"
+  }
 }
