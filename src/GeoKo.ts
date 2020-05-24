@@ -1,5 +1,5 @@
-import GeoPoint from "./GeoPoint";
-import ConvertLocation from "./ConvertLocation";
+import GeoPoint from './GeoPoint';
+import ConvertLocation from './ConvertLocation';
 
 export default class GeoKo {
   private point: GeoPoint;

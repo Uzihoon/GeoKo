@@ -1,4 +1,4 @@
-import GeoPoint from "./GeoPoint";
+import GeoPoint from './GeoPoint';
 
 export default class ConvertLocation {
   public GEO = 0;
@@ -89,7 +89,7 @@ export default class ConvertLocation {
   }
 
   private initialEsEspInd(type: number) {
-    let tmp = this.m_arMinor[type] / this.m_arMajor[type];
+    const tmp = this.m_arMinor[type] / this.m_arMajor[type];
 
     this.m_Es[type] = 1.0 - tmp * tmp;
     this.m_Esp[type] = this.m_Es[type] / (1.0 - this.m_Es[type]);
@@ -105,13 +105,7 @@ export default class ConvertLocation {
     const es = this.m_Es[type];
     const data =
       this.m_arMajor[type] *
-      this.mlfn(
-        this.e0fn(es),
-        this.e1fn(es),
-        this.e2fn(es),
-        this.e3fn(es),
-        this.m_arLatCenter[type]
-      );
+      this.mlfn(this.e0fn(es), this.e1fn(es), this.e2fn(es), this.e3fn(es), this.m_arLatCenter[type]);
     this.src_m[type] = data;
     this.dst_m[type] = data;
   }
@@ -125,12 +119,7 @@ export default class ConvertLocation {
   }
 
   private mlfn(e0: number, e1: number, e2: number, e3: number, phi: number) {
-    return (
-      e0 * phi -
-      e1 * Math.sin(2.0 * phi) +
-      e2 * Math.sin(4.0 * phi) -
-      e3 * Math.sin(6.0 * phi)
-    );
+    return e0 * phi - e1 * Math.sin(2.0 * phi) + e2 * Math.sin(4.0 * phi) - e3 * Math.sin(6.0 * phi);
   }
 
   private e0fn(x: number) {
@@ -186,30 +175,21 @@ export default class ConvertLocation {
     let cos_phi = Math.cos(in_pt.y);
 
     if (this.m_Ind[dsttype] !== 0) {
-      let b = cos_phi * Math.sin(delta_lon);
+      const b = cos_phi * Math.sin(delta_lon);
 
       if (Math.abs(Math.abs(b) - 1.0) < this.EPSLN) {
         // 무한대 에러
-        console.error("무한대 에러");
+        console.error('무한대 에러');
       }
     } else {
-      let b = 0;
-      x =
-        0.5 *
-        this.m_arMajor[dsttype] *
-        this.m_arScaleFactor[dsttype] *
-        Math.log((1.0 + b) / (1.0 - b));
+      const b = 0;
+      x = 0.5 * this.m_arMajor[dsttype] * this.m_arScaleFactor[dsttype] * Math.log((1.0 + b) / (1.0 - b));
 
-      let con = Math.acos(
-        (cos_phi * Math.cos(delta_lon)) / Math.sqrt(1.0 - b * b)
-      );
+      let con = Math.acos((cos_phi * Math.cos(delta_lon)) / Math.sqrt(1.0 - b * b));
 
       if (in_pt.y < 0) {
         con = con * -1;
-        y =
-          this.m_arMajor[dsttype] *
-          this.m_arScaleFactor[dsttype] *
-          (con - this.m_arLatCenter[dsttype]);
+        y = this.m_arMajor[dsttype] * this.m_arScaleFactor[dsttype] * (con - this.m_arLatCenter[dsttype]);
       }
     }
 
@@ -227,7 +207,7 @@ export default class ConvertLocation {
         this.e1fn(this.m_Es[dsttype]),
         this.e2fn(this.m_Es[dsttype]),
         this.e3fn(this.m_Es[dsttype]),
-        in_pt.y
+        in_pt.y,
       );
 
     out_pt.x =
@@ -236,15 +216,7 @@ export default class ConvertLocation {
         al *
         (1.0 +
           (als / 6.0) *
-            (1.0 -
-              t +
-              c +
-              (als / 20.0) *
-                (5.0 -
-                  18.0 * t +
-                  t * t +
-                  72.0 * c -
-                  58.0 * this.m_Esp[dsttype]))) +
+            (1.0 - t + c + (als / 20.0) * (5.0 - 18.0 * t + t * t + 72.0 * c - 58.0 * this.m_Esp[dsttype]))) +
       this.m_arFalseEasting[dsttype];
 
     out_pt.y =
@@ -260,12 +232,7 @@ export default class ConvertLocation {
                     t +
                     9.0 * c +
                     4.0 * c * c +
-                    (als / 30.0) *
-                      (61.0 -
-                        58.0 * t +
-                        t * t +
-                        600.0 * c -
-                        330.0 * this.m_Esp[dsttype]))))) +
+                    (als / 30.0) * (61.0 - 58.0 * t + t * t + 600.0 * c - 330.0 * this.m_Esp[dsttype]))))) +
       this.m_arFalseNorthing[dsttype];
   }
 
@@ -274,13 +241,9 @@ export default class ConvertLocation {
     const max_iter = 6;
 
     if (this.m_Ind[srctype] !== 0) {
-      const f = Math.exp(
-        in_pt.x / (this.m_arMajor[srctype] * this.m_arScaleFactor[srctype])
-      );
+      const f = Math.exp(in_pt.x / (this.m_arMajor[srctype] * this.m_arScaleFactor[srctype]));
       const g = 0.5 * (f - 1.0 / f);
-      const temp =
-        this.m_arLatCenter[srctype] +
-        tmpPt.y / (this.m_arMajor[srctype] * this.m_arScaleFactor[srctype]);
+      const temp = this.m_arLatCenter[srctype] + tmpPt.y / (this.m_arMajor[srctype] * this.m_arScaleFactor[srctype]);
       const h = Math.cos(temp);
       const con = Math.sqrt((1.0 - h * h) / (1.0 + g * g));
       out_pt.y = this.asinz(con);
@@ -297,9 +260,7 @@ export default class ConvertLocation {
     tmpPt.x -= this.m_arFalseEasting[srctype];
     tmpPt.y -= this.m_arFalseNorthing[srctype];
 
-    const con =
-      (this.src_m[srctype] + tmpPt.y / this.m_arScaleFactor[srctype]) /
-      this.m_arMajor[srctype];
+    const con = (this.src_m[srctype] + tmpPt.y / this.m_arScaleFactor[srctype]) / this.m_arMajor[srctype];
 
     let phi = con;
     let i = 0;
@@ -348,13 +309,7 @@ export default class ConvertLocation {
                 10.0 * c -
                 4.0 * cs -
                 9.0 * this.m_Esp[srctype] -
-                (ds / 30.0) *
-                  (61.0 +
-                    90.0 * t +
-                    298.0 * c +
-                    45.0 * ts -
-                    252.0 * this.m_Esp[srctype] -
-                    3.0 * cs)));
+                (ds / 30.0) * (61.0 + 90.0 * t + 298.0 * c + 45.0 * ts - 252.0 * this.m_Esp[srctype] - 3.0 * cs)));
       out_pt.x =
         this.m_arLonCenter[srctype] +
         (d *
@@ -363,13 +318,7 @@ export default class ConvertLocation {
               (1.0 +
                 2.0 * t +
                 c -
-                (ds / 20.0) *
-                  (5.0 -
-                    2.0 * c +
-                    28.0 * t -
-                    3.0 * cs +
-                    8.0 * this.m_Esp[srctype] +
-                    24.0 * ts)))) /
+                (ds / 20.0) * (5.0 - 2.0 * c + 28.0 * t - 3.0 * cs + 8.0 * this.m_Esp[srctype] + 24.0 * ts)))) /
           cos_phi;
     } else {
       out_pt.y = Math.PI * 0.5 * Math.sin(tmpPt.y);
@@ -389,8 +338,7 @@ export default class ConvertLocation {
     const latitude = lat2 - lat1;
 
     const a =
-      Math.pow(Math.sin(latitude / 2.0), 2) +
-      Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(longitude / 2.0), 2);
+      Math.pow(Math.sin(latitude / 2.0), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(longitude / 2.0), 2);
 
     return 6376.5 * 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a));
   }
@@ -485,7 +433,7 @@ export default class ConvertLocation {
 
     let Longitude = p.x;
     let Latitude = p.y;
-    let Height = p.z;
+    const Height = p.z;
     let X: number;
     let Y: number;
     let Z: number;
@@ -529,9 +477,9 @@ export default class ConvertLocation {
   }
 
   private geocentric_to_geodetic(type: number, p: GeoPoint) {
-    let X = p.x;
-    let Y = p.y;
-    let Z = p.z;
+    const X = p.x;
+    const Y = p.y;
+    const Z = p.z;
     let Longitude: number;
     let Latitude = 0;
     let Height: number;
@@ -553,7 +501,7 @@ export default class ConvertLocation {
 
     At_Pole = false;
 
-    if (X != 0.0) {
+    if (X !== 0.0) {
       Longitude = Math.atan2(Y, X);
     } else {
       if (Y > 0) {
@@ -591,8 +539,7 @@ export default class ConvertLocation {
     S1 = Math.sqrt(T1 * T1 + Sum * Sum);
     Sin_p1 = T1 / S1;
     Cos_p1 = Sum / S1;
-    Rn =
-      this.m_arMajor[type] / Math.sqrt(1.0 - this.m_Es[type] * Sin_p1 * Sin_p1);
+    Rn = this.m_arMajor[type] / Math.sqrt(1.0 - this.m_Es[type] * Sin_p1 * Sin_p1);
 
     if (Cos_p1 >= this.COS_67P5) {
       Height = W / Cos_p1 - Rn;

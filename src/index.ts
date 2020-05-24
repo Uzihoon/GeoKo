@@ -1,1 +1,1 @@
-export { default } from "./GeoKo";
+export { default } from './GeoKo';

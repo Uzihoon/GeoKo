@@ -1,19 +1,19 @@
 {
   "name": "geoko",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "GecKo is the library converting geolocation code.",
   "main": "src/index.ts",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm test && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -39,9 +39,8 @@
     "prettier": "^2.0.5",
     "ts-jest": "^26.0.0",
     "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0"
-  },
-  "dependencies": {
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.9.3"
-  }
+  },
+  "dependencies": {}
 }
