@@ -2,7 +2,7 @@
   "name": "geoko",
   "version": "1.0.3",
   "description": "GecKo is the library converting geolocation code.",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
