@@ -1,6 +1,6 @@
 {
   "name": "geoko",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GecKo is the library converting geolocation code.",
   "main": "src/index.ts",
   "types": "lib/index.d.ts",
