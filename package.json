@@ -32,6 +32,9 @@
   "bugs": {
     "url": "https://github.com/Uzihoon/GeoKo/issues"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "homepage": "https://github.com/Uzihoon/GeoKo#readme",
   "devDependencies": {
     "@types/jest": "^25.2.3",
