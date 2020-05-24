@@ -20,14 +20,17 @@ export default class GeoPoint {
     return this._z;
   }
 
+  // tslint:disable-next-line: adjacent-overload-signatures
   set x(x: number) {
     this._x = x;
   }
 
+  // tslint:disable-next-line: adjacent-overload-signatures
   set y(y: number) {
     this._y = y;
   }
 
+  // tslint:disable-next-line: adjacent-overload-signatures
   set z(z: number) {
     this._z = z;
   }
