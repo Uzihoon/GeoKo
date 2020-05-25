@@ -47,3 +47,7 @@ console.log(tm_location.y); // 442278.8034298837
 | KATEC | TM    | katec_to_tm    |
 | KATEC | GRS80 | katec_to_grs80 |
 | KATEC | UTMK  | katec_to_utmk  |
+
+## License
+
+Released under the [MIT License.](https://github.com/Uzihoon/GeoKo/blob/master/LICENSE)
