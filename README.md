@@ -2,6 +2,8 @@
 
 GecKo is the library converting korea geolocation code.
 
+See [demo](https://uzihoon.github.io/GeoKo/).
+
 ## Installation
 
 Using npm
